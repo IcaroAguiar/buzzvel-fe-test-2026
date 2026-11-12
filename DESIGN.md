@@ -13,6 +13,10 @@ Do not redesign it. Only visible layers count; the source contains hidden templa
 - Desktop width 1280px, inner gutters 80px, most section vertical padding 100px.
 - Mobile width 402px, 20px horizontal gutters and generally 60px section padding.
 - Header 70px. Desktop hero 720px with a 500×520px image and 24px image radius.
+- Hero paragraph width 480px. Desktop quote 30px/44px, weight 600, width 600px.
+
+Small labels originally using #71798E are darkened to #656770 for contrast.
+Mobile inputs use 16px text to prevent iOS focus zoom.
 
 ## Layout evidence
 

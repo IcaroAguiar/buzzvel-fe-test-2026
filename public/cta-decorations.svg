@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 470" fill="none" stroke="#FFCB9F" stroke-width="2">
+  <circle cx="76" cy="70" r="53"/><circle cx="893" cy="60" r="14"/><circle cx="1225" cy="446" r="14"/>
+  <rect x="324" y="50" width="56" height="56" rx="8" transform="rotate(12 352 78)" stroke-width="1"/>
+  <rect x="1150" y="-25" width="116" height="124" rx="8" transform="rotate(12 1208 37)" fill="#FFCB9F" stroke="none"/>
+  <circle cx="116" cy="436" r="60" fill="#FFCB9F" stroke="none"/>
+  <rect x="-26" y="238" width="52" height="56" rx="8" transform="rotate(12 0 266)" fill="#FFCB9F" stroke="none"/>
+  <path d="M145 243a14 14 0 1 1 7 7l-10 3 3-10Z" fill="#FFCB9F" stroke="none"/>
+  <g transform="translate(1160 260)"><path d="m-30-18 30-20 30 20v22L0 24-30 4Zm0 0L0 2l30-20M0 2v22M0-38v21l30 21M0-17-30 4"/></g>
+  <g transform="translate(1046 118)"><path d="M0-14C-13 0-9 12 0 12S13 0 0-14" fill="#FFCB9F" stroke="none"/><path d="M0-24v-9M-21-9l-7-6M21-9l7-6M-20 12h-10M20 12h10"/></g>
+  <g transform="translate(980 404)"><path d="M-18-14h40v28h-40ZM-3-14v28M9-14v28M-10-5l-3 5 3 5M16-5l3 5-3 5"/></g>
+  <path d="M316 386c24 0 23 23 8 24 17 6 12 28-8 28h-14Z" fill="#FFCB9F" stroke="none" transform="rotate(12 318 410)"/>
+</svg>
