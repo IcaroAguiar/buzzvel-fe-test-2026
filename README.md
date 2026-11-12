@@ -77,7 +77,7 @@ OpenAI GPT-6.1 Sol assisted with design inspection, implementation, tests and do
 
 AI output is checked with TypeScript, lint, a production build, real browser interactions, automated accessibility checks and opened visual captures. No generated marketing imagery or substitute design was used.
 
-Approximate effort: about one hour of agent-assisted implementation and verification, excluding waiting for Figma access. This is elapsed assisted work, not a claim of one hour of manual coding; the final record includes any additional review time.
+Approximate effort: about 90 minutes of elapsed agent-assisted implementation, verification and review, excluding waiting for Figma access. This includes tool/model and local job-queue waits; it is not a claim of 90 minutes of manual coding.
 
 ## Scope and limitations
 
