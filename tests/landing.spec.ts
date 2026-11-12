@@ -141,7 +141,7 @@ test("contact form rejects invalid input and acknowledges a local preview withou
         question: "Sua dúvida",
         send: "Enviar mensagem",
         thanks: "Obrigado",
-        notice: "Nenhuma mensagem foi enviada.",
+        notice: "Nada foi salvo nem enviado.",
         reset: "Escrever outra mensagem",
       }
     : {
@@ -150,7 +150,7 @@ test("contact form rejects invalid input and acknowledges a local preview withou
         question: "Your question",
         send: "Send message",
         thanks: "Thank you",
-        notice: "No message was sent.",
+        notice: "Nothing was saved or sent.",
         reset: "Write another message",
       };
   const outbound: string[] = [];
@@ -242,10 +242,25 @@ test("account and policy controls disclose their demo scope without collecting c
   await page.keyboard.press("Escape");
   await expect(loginPreview).not.toBeVisible();
   await expect(login).toBeFocused();
+  await login.click();
+  await loginPreview
+    .getByRole("link", { name: "Get in touch", exact: true })
+    .click();
+  await expect(page).toHaveURL(/#contact$/);
+  await expect(loginPreview).not.toBeVisible();
+  if (testInfo.project.name === "mobile") {
+    await expect(
+      page.getByRole("button", { name: "Open menu", exact: true }),
+    ).toHaveAttribute("aria-expanded", "false");
+  }
   const terms = page.getByRole("button", { name: "Terms", exact: true });
   await terms.click();
   const termsPreview = page.getByRole("dialog", { name: "Terms", exact: true });
   await expect(termsPreview).toContainText("not a terms-of-service agreement");
+  await mkdir(".artifacts/qa", { recursive: true });
+  await page.screenshot({
+    path: `.artifacts/qa/policy-${testInfo.project.name}.png`,
+  });
   expect(
     (
       await new AxeBuilder({ page })

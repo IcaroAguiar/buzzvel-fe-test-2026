@@ -43,7 +43,7 @@ tests/landing.spec.ts       Browser behavior, overflow and accessibility checks
 
 Course buttons open a local preview; navigation reaches sections on this page. Log in, Terms, Privacy, Careers and Journal open an explicit demonstration notice instead of impersonating an account service or a policy page. Course/community navigation reaches the relevant sections. There are no dead `#` links or invented external services.
 
-The contact form rejects missing, malformed and whitespace-only required input. Submission changes local UI state only and explicitly says that **no message was sent**. It does not persist personal data, call an API or send email. Controls intentionally omit serialization names: even a native submission before hydration or with JavaScript disabled cannot put personal fields into a GET URL. A no-script note explains the limitation; the separate email link opens the visitor's email application.
+The contact form rejects missing, malformed and whitespace-only required input. Submission changes local UI state only and explicitly says that **nothing was saved or sent**. It does not persist personal data, call an API or send email. Controls intentionally omit serialization names: even a native submission before hydration or with JavaScript disabled cannot put personal fields into a GET URL. A no-script note explains the limitation; the separate email link opens the visitor's email application.
 
 Two differences between the supplied frames are preserved: the mobile form uses Portuguese while the desktop form uses English, and the mobile steps read 01/02/03 while the desktop design repeats 01. A viewport subscription updates the form's copy without replacing its fields, preserving entered values across resizing. The server initially renders English; mobile Portuguese is applied after hydration. The English “Contact us” heading retains its own language annotation, as the supplied mobile frame mixes both languages.
 
@@ -61,6 +61,8 @@ CI=1 pnpm test:e2e
 
 Local macOS runs use installed Google Chrome; CI uses Playwright's pinned Chromium. The tests start a fresh production server on port 3348 and stop it afterward. An occupied port fails the run instead of silently reusing another build. One browser worker keeps memory use predictable. The GitHub Actions workflow runs lint, typecheck, build and the browser tests, and retains screenshots, traces on failure and the HTML report for 14 days.
 
+Build workers are capped at two to bound memory use on smaller machines and keep local/CI verification predictable. This uses Next.js's experimental `cpus` setting in `next.config.ts`; the project pins Next's version and validates the production build. The limit trades some build parallelism for predictable memory use and does not limit request handling.
+
 The browser tests exercise navigation and focus, course details, invalid and successful form states, absence of POST requests, runtime errors, and horizontal overflow at 320, 375, 402, 768, 1024, 1280 and 1440px. Axe checks the page and an open dialog against WCAG A/AA rules; this is a useful automated check, not a claim of complete accessibility compliance.
 
 Full-page design snapshots were exported directly from Figma at 2×, then compared side by side with production browser captures at 1280px and 402px. The reference exports and challenge PDF remain local; generated evidence lives in the ignored `.artifacts/` directory. See [DESIGN.md](DESIGN.md), [the contract](docs/challenge.md) and [asset provenance](docs/assets.md).
@@ -71,7 +73,7 @@ Validation results and the independent review are recorded in [docs/verification
 
 The implementation started by reading the challenge PDF, inventorying every visible section, exporting both complete Figma frames, inspecting typography/spacing and downloading the source imagery. A first working page was followed by browser tests and a desktop/mobile visual comparison. Fixes included image cropping, card spacing, small-label contrast and the frame-specific mobile content.
 
-OpenAI GPT-6.1 Sol assisted with design inspection, implementation, tests and documentation. Claude Sonnet 5.5 and Claude Haiku 5.5 supplied parallel preliminary reviews. Their findings led to dialog-centering, focus-continuity, menu-dismissal and demo-destination fixes, plus more precise language tests. A fresh Claude Sonnet 5.5 session at high effort reviews the finished diff against both the challenge requirements and code quality. Findings are evaluated against source and browser evidence before changes are accepted. Actual review outcomes, rather than a model's presence alone, are recorded in the verification document.
+OpenAI GPT-6.1 Sol assisted with design inspection, implementation, tests and documentation. Claude Sonnet 5.5 and Claude Haiku 5.5 supplied parallel preliminary reviews. Their findings led to dialog-centering, focus-continuity, menu-dismissal and demo-destination fixes, plus more precise language tests. A fresh Claude Sonnet 5.5 session at high effort reviewed the complete diff and the full-page visual comparisons, finding no blocking issue. Findings are evaluated against source and browser evidence before changes are accepted; one predicted menu bug was rejected after a real browser regression passed on the unchanged implementation. Review outcomes and follow-up corrections are recorded in the verification document.
 
 AI output is checked with TypeScript, lint, a production build, real browser interactions, automated accessibility checks and opened visual captures. No generated marketing imagery or substitute design was used.
 
@@ -80,5 +82,7 @@ Approximate effort: about one hour of agent-assisted implementation and verifica
 ## Scope and limitations
 
 This is a recruitment demonstration using supplied sample content. There is no backend, enrollment, login, payment, analytics or message delivery. It has not been tested on a physical phone or with a screen reader; Chromium emulation does not establish Safari or real-device behavior. Exact raster equality across Figma, browsers and font-rendering environments is not asserted. Small spacing and font-rendering differences remain, including text wrapping and vertical alignment around the community collage; no pixel-equality score is claimed. There is no Lighthouse score or public deployment unless linked in the verification record.
+
+Search indexing is disabled with `noindex, nofollow` metadata because this is a recruitment demo with sample content.
 
 The design and its imagery belong to their respective owners and are used only for this supplied exercise. Full design exports are not included in the public repository. Source publication does not submit the recruitment form.

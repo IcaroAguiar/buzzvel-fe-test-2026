@@ -841,6 +841,7 @@ figcaption span {
   background: rgb(23 27 44 / 50%);
 }
 .course-dialog h2 {
+  letter-spacing: -0.5px;
   color: var(--ink);
   font-family: var(--font-display);
   font-weight: 800;

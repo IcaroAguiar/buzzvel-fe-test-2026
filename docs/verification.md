@@ -19,4 +19,8 @@ Two read-only preliminary reviews ran through the personal Claude provider: Sonn
 
 The English SSR fallback for the mobile form was intentionally retained and documented: a single form preserves the visitor's input. The English heading has its own language annotation. A preliminary concern about publishing incomplete review outcomes was dismissed because the record explicitly marked them pending; final outcomes are added only after execution. Local review-harness configuration is ignored rather than published.
 
-The fresh independent adversarial review and GitHub Actions result will be recorded after they complete. No deployment or challenge-form submission has been performed.
+The fresh Sonnet 5.5 high review of `c2361d7` opened every desktop/mobile comparison and both course-dialog captures. It returned **APPROVE_WITH_RESIDUAL_RISK**, with zero blocking findings and no actionable Spec failure. All sections, order, imagery, badges, frame-specific content and centered dialogs were confirmed. Residual differences include small accumulated vertical spacing, footer-column spacing, a slightly stronger step-02 icon color and the intentional input typography adjustment.
+
+Five minor Standards observations were triaged: dialog-heading tracking was made explicit; confirmation copy no longer suggests retained data; the two-worker build limit and no-index metadata are documented; the Node engine now matches the tested Node 24 baseline. The predicted stale mobile menu after leaving the login dialog was not reproduced: the added desktop/mobile browser case passed against the unchanged implementation and verifies the menu is collapsed after navigation. No redundant navigation callback was added.
+
+Follow-up checks, the delta review and GitHub Actions result will be recorded after they complete. No deployment or challenge-form submission has been performed.

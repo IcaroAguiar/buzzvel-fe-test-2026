@@ -23,8 +23,7 @@ const messages = {
     nameError: "Please enter your name.",
     questionError: "Please enter your question.",
     thanks: "Thank you",
-    confirmation:
-      "Your message has been captured for this preview. No message was sent.",
+    confirmation: "This is a preview. Nothing was saved or sent.",
     reset: "Write another message",
   },
   pt: {
@@ -39,8 +38,7 @@ const messages = {
     nameError: "Informe seu nome.",
     questionError: "Informe sua dúvida.",
     thanks: "Obrigado",
-    confirmation:
-      "Sua mensagem foi registrada apenas nesta demonstração. Nenhuma mensagem foi enviada.",
+    confirmation: "Esta é uma demonstração. Nada foi salvo nem enviado.",
     reset: "Escrever outra mensagem",
   },
 };
