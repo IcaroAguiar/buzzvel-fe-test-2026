@@ -58,7 +58,7 @@ export function SiteHeader() {
       >
         <Container className="flex h-17 items-center justify-between gap-8 lg:h-[69px]">
           <a
-            className="font-display text-[22px]/7 font-extrabold tracking-[-.8px]"
+            className="font-display text-[22px]/7 font-semibold tracking-[-.6px]"
             href="#top"
             aria-label="Luma home"
             onClick={closeMenu}

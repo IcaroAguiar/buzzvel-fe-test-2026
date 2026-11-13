@@ -65,7 +65,7 @@ export function HowItWorks() {
                   {String(index + 1).padStart(2, "0")}
                 </span>
               </p>
-              <h3 className="mb-3 font-display text-xl/7 font-bold tracking-[-.5px] md:mb-4">
+              <h3 className="mb-3 font-display text-xl/7 font-bold tracking-[-.2px] md:mb-4">
                 {step.title}
               </h3>
               <p className="text-sm/6 text-luma-muted md:text-base/7">

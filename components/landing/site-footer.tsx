@@ -65,7 +65,7 @@ export function Footer() {
         <div className="mb-10 grid grid-cols-2 gap-x-5 gap-y-8 md:mb-16 md:grid-cols-[2fr_1fr_1fr_1fr] md:gap-10 wide:grid-cols-[388px_180px_180px_1fr] wide:gap-15">
           <div className="col-span-2 md:col-span-1">
             <a
-              className="mb-2.5 inline-block font-display text-[22px]/7 font-extrabold tracking-[-.8px] text-white focus-visible:outline-luma-cream"
+              className="mb-2.5 inline-block font-display text-[22px]/7 font-semibold tracking-[-.6px] text-white focus-visible:outline-luma-cream"
               href="#top"
               aria-label="Luma home"
             >

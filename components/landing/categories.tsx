@@ -56,7 +56,7 @@ export function Categories() {
               <span className="mb-6 rounded-md bg-luma-pale px-2 py-[3px] text-xs/[18px] font-semibold tracking-[1.2px] text-luma-blue">
                 {category.number}
               </span>
-              <h3 className="mb-3 font-display text-xl/7 font-bold tracking-[-.5px] whitespace-nowrap md:mb-4">
+              <h3 className="mb-3 font-display text-xl/7 font-bold tracking-[-.2px] whitespace-nowrap md:mb-4">
                 {category.title}
               </h3>
               <p className="mb-4 text-sm/6 text-luma-muted md:mb-[18px]">

@@ -112,7 +112,7 @@ export function ContactForm() {
       lang={mobile ? "pt-BR" : "en"}
     >
       <h3
-        className="mb-3 font-display text-xl/7 font-bold tracking-[-.5px]"
+        className="mb-3 font-display text-xl/7 font-bold tracking-[-.2px]"
         lang="en"
       >
         Contact us
