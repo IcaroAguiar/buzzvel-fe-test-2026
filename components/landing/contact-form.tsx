@@ -1,7 +1,30 @@
 "use client";
 
 import { useCallback, useRef, useState, useSyncExternalStore } from "react";
-import type { FormEvent } from "react";
+import { Button } from "../ui/button";
+import type { ReactNode, FormEvent } from "react";
+
+const fieldClass =
+  "w-full min-w-0 rounded-lg border border-luma-border bg-luma-paper px-4 py-3 text-base/[22px] text-luma-ink caret-luma-blue placeholder:text-luma-muted placeholder:opacity-100 md:text-sm";
+
+function Field({
+  id,
+  label,
+  children,
+}: {
+  id: string;
+  label: string;
+  children: ReactNode;
+}) {
+  return (
+    <div className="grid gap-2">
+      <label className="text-sm/5 font-bold" htmlFor={id}>
+        {label}
+      </label>
+      {children}
+    </div>
+  );
+}
 
 const mobileQuery = "(max-width: 767px)";
 function subscribeToViewport(onChange: () => void) {
@@ -84,9 +107,17 @@ export function ContactForm() {
   }
 
   return (
-    <div className="contact-card" lang={mobile ? "pt-BR" : "en"}>
-      <h3 lang="en">Contact us</h3>
-      <p>{copy.intro}</p>
+    <div
+      className="rounded-2xl border border-luma-border p-5 shadow-[0_12px_32px_#171b2c08] md:p-7 wide:p-10"
+      lang={mobile ? "pt-BR" : "en"}
+    >
+      <h3
+        className="mb-3 font-display text-xl/7 font-bold tracking-[-.5px]"
+        lang="en"
+      >
+        Contact us
+      </h3>
+      <p className="mb-6 text-sm/6 text-luma-muted">{copy.intro}</p>
       <noscript>
         <p>
           This demo needs JavaScript for local confirmation. You can use the
@@ -95,17 +126,16 @@ export function ContactForm() {
       </noscript>
       {state.kind === "complete" ? (
         <div
-          className="contact-confirmation"
+          className="grid min-h-[420px] content-center gap-6 md:min-h-[396px]"
           role="status"
           tabIndex={-1}
           ref={focusConfirmation}
         >
-          <h4>
+          <h4 className="font-display text-xl/7 font-bold">
             {copy.thanks}, {state.name}.
           </h4>
-          <p>{copy.confirmation}</p>
-          <button
-            className="button button-primary"
+          <p className="text-luma-muted">{copy.confirmation}</p>
+          <Button
             type="button"
             onClick={() => {
               resetFocusRequested.current = true;
@@ -113,15 +143,15 @@ export function ContactForm() {
             }}
           >
             {copy.reset}
-          </button>
+          </Button>
         </div>
       ) : (
-        <form onSubmit={submit}>
+        <form className="grid gap-6" onSubmit={submit}>
           {/* Omit name attributes so a native pre-hydration GET cannot serialize personal input. */}
-          <div className="form-field">
-            <label htmlFor="contact-name">{copy.name}</label>
+          <Field id="contact-name" label={copy.name}>
             <input
               id="contact-name"
+              className={fieldClass + " h-12"}
               ref={focusNameOnReset}
               autoComplete="name"
               placeholder={copy.namePlaceholder}
@@ -129,31 +159,32 @@ export function ContactForm() {
               maxLength={100}
               onInput={(event) => event.currentTarget.setCustomValidity("")}
             />
-          </div>
-          <div className="form-field">
-            <label htmlFor="contact-email">{copy.email}</label>
+          </Field>
+          <Field id="contact-email" label={copy.email}>
             <input
               id="contact-email"
+              className={fieldClass + " h-12"}
               type="email"
               autoComplete="email"
               placeholder={copy.emailPlaceholder}
               required
               maxLength={254}
             />
-          </div>
-          <div className="form-field">
-            <label htmlFor="contact-question">{copy.question}</label>
+          </Field>
+          <Field id="contact-question" label={copy.question}>
             <textarea
               id="contact-question"
+              className={
+                fieldClass +
+                " min-h-[100px] h-[100px] resize-y md:h-30 md:min-h-30"
+              }
               placeholder={copy.questionPlaceholder}
               required
               maxLength={2000}
               onInput={(event) => event.currentTarget.setCustomValidity("")}
             />
-          </div>
-          <button className="button button-primary" type="submit">
-            {copy.send}
-          </button>
+          </Field>
+          <Button type="submit">{copy.send}</Button>
         </form>
       )}
     </div>

@@ -1,32 +1,46 @@
 # Verification record
 
-## Local evidence
+## Review baseline and corrections
 
-- Production build: passed with Next.js 16.4.6 on Node.js 24.22.2, generating a static home page.
-- Typecheck: passed with strict TypeScript and unchecked index access enabled.
-- Browser file: passed using installed Chrome in desktop/mobile projects. Mobile navigation and the no-JavaScript fallback each run once in the appropriate project. Overflow assertions cover 320, 375, 402, 768, 1024, 1280 and 1440px. Keyboard, centered dialogs, focus return/reset, input and focus preservation across resizing, validation, local confirmation and absence of POST requests passed.
-- The JavaScript-disabled regression first reproduced personal fields being serialized into a GET URL. After removing serialization names, native fallback navigation has neither query parameters nor a POST body. Browser validation and the JavaScript-enabled local confirmation still pass.
-- Axe: no WCAG A/AA violations in the tested page, course, account and policy dialog states on either viewport.
-- Design inspection: opened desktop/mobile full-page captures alongside the supplied frame exports. All sections are present and responsive composition follows both frames. There are minor rendering/spacing differences; no pixel-equality score is claimed.
-- Impeccable mechanical detector: returned an empty findings array.
-- Final T0: PASS, including typecheck, lint, browser tests and scanners. No new secrets, conflict markers, Semgrep findings or vulnerable dependencies reported. Source files and binary assets have different scanning coverage; the report lists skipped binaries.
+The earlier iteration at `b239c78` had passed local checks and a Sonnet review. That approval did not establish that every design or architecture requirement was satisfied. A subsequent independent GPT-6 Astra review read the four-page challenge PDF, source at that exact commit, complete desktop/mobile comparisons and dialog captures, returning **REQUEST_CHANGES**.
 
-The initial checks caught a lazy-image capture timeout, small-label contrast failures and a tablet grid that compressed text into a narrow column. They were corrected and the browser file passed. Lint found one anonymous-export warning in the PostCSS config; that configuration was changed to a named constant and rechecked separately.
+| Baseline finding                                                                                                         | Corrective change                                                                                                      | Verification boundary                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Dialog headings inherit the featured section's mobile typography; footer focus inherits an almost-white outline on white | Dialog owns its typography; focus colors apply to footer triggers only                                                 | Browser regression reproduced both failures before correction; rerun on corrected production build |
+| A 1,388-line global stylesheet couples sections and reusable controls                                                    | Theme/base only globally, section-owned Tailwind, shared typed UI primitives; local CSS only for decorative connectors | Source inspection and cross-host dialog regression                                                 |
+| Footer behavior is inferred from display labels, with unused destinations                                                | Explicit anchor/preview discriminated union                                                                            | Source inspection and preview/navigation browser cases                                             |
+| Mobile community reuses a taller desktop image                                                                           | Dedicated mobile composition and responsive picture sources                                                            | 402px Figma/browser comparison                                                                     |
+| Tailwind is only nominal; color tokens duplicated                                                                        | Tailwind owns layout, typography, breakpoints and states; one theme token set                                          | Source inspection                                                                                  |
+| Quote glyph and mobile step-02 color differ                                                                              | Source quote graphic and measured mobile shape colors                                                                  | Desktop/mobile visual comparison                                                                   |
 
-## Independent review and CI
+CI was an implementation choice, not a challenge requirement, and has been removed at the candidate's direction. Verification remains local.
 
-Two read-only preliminary reviews ran through the personal Claude provider: Sonnet 5.5 and Haiku 5.5, both at high effort. The author triaged every finding. Corrections include native dialog centering (reproduced before correction), stable confirmation/reset focus, disclosure dismissal after focus leaves or the viewport changes, explicit account/policy demo notices, exact language assertions, preservation of input and focus on resize, fresh test-server ownership and clearer documentation.
+The course-photo concern was investigated rather than accepted as a crop change: aligned source comparisons support centered cover over stretched fill. The correction uses original photographs with one responsive optimization step to reduce compression loss; it does not distort the source photo to compensate for vertical layout offsets.
 
-The English SSR fallback for the mobile form was intentionally retained and documented: a single form preserves the visitor's input. The English heading has its own language annotation. A preliminary concern about publishing incomplete review outcomes was dismissed because the record explicitly marked them pending; final outcomes are added only after execution. Local review-harness configuration is ignored rather than published.
+## Contract coverage
 
-The fresh Sonnet 5.5 high review of `c2361d7` opened every desktop/mobile comparison and both course-dialog captures. It returned **APPROVE_WITH_RESIDUAL_RISK**, with zero blocking findings and no actionable Spec failure. All sections, order, imagery, badges, frame-specific content and centered dialogs were confirmed. Residual differences include small accumulated vertical spacing, footer-column spacing, a slightly stronger step-02 icon color and the intentional input typography adjustment.
+| Requirement                           | Implementation/evidence                                                                                      |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Next App Router, TypeScript, Tailwind | App Router, strict compiler options, section-owned utilities                                                 |
+| All visible sections in order         | Header, hero, categories, featured course, steps, testimonial/stats, community, contact, CTA, footer         |
+| Typed reusable components             | Buttons/links, container, headings, native dialog; explicit footer destination types                         |
+| Mobile, tablet, desktop               | Dedicated frame compositions at 402/1280; overflow checks at 320/375/402/768/1024/1280/1440; tablet captures |
+| Local interactions, no backend        | Anchors, mobile navigation, native dialog, validated local-only form                                         |
+| Semantics, keyboard, images, metadata | Labeled landmarks/controls, Escape/focus behavior, image alternatives, page metadata, selected Axe checks    |
+| Loading and reduced motion            | Responsive image optimizer, local fonts, hero preload, reduced-motion scrolling/transition behavior          |
+| English README and disclosure         | Run/build commands, decisions, limits, effort and actual candidate/AI roles                                  |
 
-Five minor Standards observations were triaged: dialog-heading tracking was made explicit; confirmation copy no longer suggests retained data; the two-worker build limit and no-index metadata are documented; the Node engine now matches the tested Node 24 baseline. The predicted stale mobile menu after leaving the login dialog was not reproduced: the added desktop/mobile browser case passed against the unchanged implementation and verifies the menu is collapsed after navigation. No redundant navigation callback was added.
+## Corrective-pass execution
 
-The committed delta `654e998` passed production build, strict typecheck, lint, the browser file and applicable delta scanners. A follow-up Sonnet 5.5 high review returned **APPROVE**, with no new findings or blockers. It opened the updated desktop/mobile policy and course captures and read the original four-page PDF via `pdfinfo`/`pdftotext`, confirming no mandatory requirement was omitted. All review findings have recorded author decisions.
+- Production build: passed with Next.js 16.4.6, static home page, two build workers.
+- T0 corrective delta: PASS for conflict markers, secret scan, applicable Semgrep rules, strict typecheck and lint. No lockfile change; dependency vulnerability scanning was skipped. Binary assets are outside code scanning.
+- The landing browser file passed on desktop/mobile: navigation, focus, form validation/reset, no transmission, no-JavaScript privacy, selected Axe rules and overflow at seven widths. Its two project-specific cases intentionally skip the other viewport.
+- The new isolation regression first failed on mobile heading typography and footer focus color. A later run exposed outline-color animation during focus; button transitions now affect only background/border. The corrected isolation file passed in both projects. Only that failed file was rerun after the transition change; the complete suite was not rerun on that final styling delta.
+- Opened all five desktop and seven mobile comparison bands, plus 768/1024px tablet overview captures. Desktop measures 1280×5718 against 1280×5691 (+27px); mobile measures 402×7809 against 402×7799 (+10px). Baseline differences were +44/+48px. Height differences are measurements, not a visual-quality score.
+- All sections and frame-specific compositions remain present. Residuals include text rasterization/wrapping, small accumulated vertical offsets and CTA decoration geometry. Input typography and darkened muted labels are intentional accessibility differences.
 
-## Hosted verification
+A fresh Astra review of the corrected source and these visual artifacts is pending. The baseline REQUEST_CHANGES is not approval of this correction.
 
-The authoritative hosted result is the [Quality workflow in the repository's Actions history](https://github.com/IcaroAguiar/buzzvel-fe-test-2026/actions). Each run identifies its tested commit and retains the browser report and captures. Read that live result for the published PR head; local checks do not establish hosted CI success.
+## Limits
 
-No deployment or challenge-form submission has been performed.
+No deployment or challenge-form submission has been performed. Physical phones, Safari, screen readers and Lighthouse remain unverified. Full reference exports and review artifacts remain in ignored local storage; public evidence contains implementation captures only. Full pixel equality is not asserted.

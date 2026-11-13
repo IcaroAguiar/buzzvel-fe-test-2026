@@ -41,6 +41,13 @@ test("complete page loads without runtime errors and remains usable at intermedi
     ? [320, 375, 402]
     : [768, 1024, 1280, 1440]) {
     await page.setViewportSize({ width, height: 900 });
+    if (width === 768 || width === 1024) {
+      await page.evaluate(() => document.fonts.ready);
+      await page.screenshot({
+        path: `.artifacts/qa/tablet-${width}.png`,
+        fullPage: true,
+      });
+    }
     // Geometry is measured here because horizontal overflow has no accessible-role equivalent.
     const geometry = await page.evaluate(() => ({
       width: document.documentElement.scrollWidth,

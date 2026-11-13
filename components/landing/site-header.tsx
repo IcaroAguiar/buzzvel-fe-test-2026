@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { PreviewDialog } from "./preview-dialog";
+import { PreviewDialog } from "../ui/preview-dialog";
+
+import { Container } from "../ui/container";
+import { Button, ButtonLink } from "../ui/button";
 
 const navigation = [
   { label: "Courses", href: "#courses" },
@@ -28,11 +31,14 @@ export function SiteHeader() {
 
   return (
     <>
-      <a className="skip-link" href="#main">
+      <a
+        className="absolute -top-25 left-4 z-20 rounded-lg bg-white px-5 py-3 focus:top-3"
+        href="#main"
+      >
         Skip to content
       </a>
       <header
-        className="site-header"
+        className="relative z-5 border-b border-luma-divider bg-luma-paper"
         onBlur={(event) => {
           if (!event.currentTarget.contains(event.relatedTarget)) closeMenu();
         }}
@@ -50,19 +56,20 @@ export function SiteHeader() {
           }
         }}
       >
-        <div className="section-container header-inner">
+        <Container className="flex h-17 items-center justify-between gap-8 lg:h-[69px]">
           <a
-            className="wordmark"
+            className="font-display text-[22px]/7 font-extrabold tracking-[-.8px]"
             href="#top"
             aria-label="Luma home"
             onClick={closeMenu}
           >
             luma.
           </a>
-          <button
+          <Button
+            variant="plain"
             ref={toggle}
             type="button"
-            className="menu-toggle"
+            className="-mr-0.5 p-2.5 text-luma-ink lg:hidden"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             aria-controls="main-navigation"
@@ -84,37 +91,38 @@ export function SiteHeader() {
                 strokeLinecap="round"
               />
             </svg>
-          </button>
+          </Button>
           <nav
             id="main-navigation"
             aria-label="Main navigation"
-            className={`navigation ${menuOpen ? "navigation-open" : ""}`}
+            className={`absolute inset-x-0 top-[69px] items-center gap-6 border-b border-luma-divider bg-luma-paper px-5 py-6 text-sm text-luma-muted shadow-[0_12px_24px_#171b2c1a] lg:static lg:ml-15 lg:flex lg:flex-1 lg:justify-between lg:gap-5 lg:border-0 lg:p-0 lg:shadow-none wide:ml-[305px] wide:gap-[30px] ${menuOpen ? "grid" : "hidden"}`}
           >
-            <div className="navigation-links">
+            <div className="grid items-center gap-3 whitespace-nowrap lg:flex lg:gap-5 wide:gap-8">
               {navigation.map((link) => (
-                <a href={link.href} key={link.label} onClick={closeMenu}>
+                <a
+                  className="flex min-h-11 items-center py-2 hover:underline lg:min-h-0 lg:py-0"
+                  href={link.href}
+                  key={link.label}
+                  onClick={closeMenu}
+                >
                   {link.label}
                 </a>
               ))}
             </div>
-            <div className="navigation-actions">
+            <div className="flex items-center justify-between gap-6 whitespace-nowrap">
               <PreviewDialog
                 title="Log in"
                 description="Account access is outside this single-page demonstration. No login credentials are collected."
-                className="navigation-preview"
+                className="min-h-11 lg:min-h-0"
               >
                 Log in
               </PreviewDialog>
-              <a
-                href="#courses"
-                className="button button-primary"
-                onClick={closeMenu}
-              >
+              <ButtonLink compact href="#courses" onClick={closeMenu}>
                 Start learning
-              </a>
+              </ButtonLink>
             </div>
           </nav>
-        </div>
+        </Container>
       </header>
     </>
   );
