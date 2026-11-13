@@ -8,11 +8,17 @@ Do not redesign it. Only visible layers count; the source contains hidden templa
 
 - Primary: #3157F6; body/title foreground #171B2C; secondary foreground #656770.
 - Warm surface: #F9F8F3; white #FFFFFF; pale blue #E2E8FF; CTA surface #FFF1C2.
-- Display: Plus Jakarta Sans, weight 800. Section title 48px/56px, tracking -1.2px.
+- Display: Plus Jakarta Sans. Hero and final CTA use weight 800; ordinary section
+  titles use weight 700, 48px/56px and -0.96px tracking on desktop,
+  32px/36px and -0.8px tracking on mobile.
 - Body: Inter, regular. Large body 18px/28px. Use self-hosted Latin font assets.
 - Desktop width 1280px, inner gutters 80px, most section vertical padding 100px.
 - Mobile width 402px, 20px horizontal gutters and generally 60px section padding.
 - Header 70px. Desktop hero 720px with a 500×520px image and 24px image radius.
+- Hero paragraph width 480px. Desktop quote 30px/44px, weight 600, width 600px.
+
+Small labels originally using #71798E are darkened to #656770 for contrast.
+Mobile inputs use 16px text to prevent iOS focus zoom.
 
 ## Layout evidence
 
@@ -38,3 +44,22 @@ as a single raster to preserve the exact supplied design. See docs/assets.md.
 No animations or interactions should be claimed as Figma-defined unless observed.
 Use simple hover/focus feedback and respect reduced motion. Never add decorative
 effects that move the implementation away from the supplied frames.
+
+## Featured-course typography correction
+
+The blue featured-course heading uses Plus Jakarta Sans 700: 48/56px with
+-0.96px tracking on desktop, 32/36px with -0.8px tracking on mobile. This
+section-specific role replaces the initial blanket 800-weight heading assumption.
+Comparison against the original frame glyph shapes and bounds supports the
+lighter weight and spacing; font inspector metadata was unavailable in the guest preview.
+
+## Typography sweep
+
+The category, how-it-works, community and contact headings share the corrected
+700-weight section-heading role. Smaller category, step and contact-card headings
+keep weight 700 with -0.2px tracking instead of -0.5px. Both wordmarks use weight
+600 and -0.6px tracking. Comparison uses original frame glyphs, not a blanket
+replacement of every heading: the hero, final CTA and quotation retain their
+distinct roles. Form input text remains 16px on mobile for the documented iOS
+zoom adjustment. These refinements are inferred from frame comparisons; no
+claim of inspected Figma font metadata or cross-renderer pixel identity is made.
