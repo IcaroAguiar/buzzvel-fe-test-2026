@@ -44,7 +44,7 @@ export function Community() {
             Explore teachers and students
           </ButtonLink>
         </div>
-        <picture>
+        <picture className="mt-3.5 md:mt-0">
           <source
             media="(min-width: 768px)"
             srcSet={desktop.srcSet}

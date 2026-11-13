@@ -22,7 +22,7 @@ export function Testimonial() {
             The lessons are short enough to fit into my week, but detailed
             enough that I actually leave with something I can use.
           </blockquote>
-          <figcaption className="flex items-center gap-3 text-sm md:gap-4">
+          <figcaption className="flex items-center gap-4 text-sm">
             <Image
               className="rounded-full"
               src={alexAvatar}
@@ -31,10 +31,8 @@ export function Testimonial() {
               height={48}
             />
             <div>
-              <strong className="block text-sm font-bold md:text-base">
-                Alex Morgan
-              </strong>
-              <span className="block text-xs text-luma-muted md:text-sm">
+              <strong className="block text-base font-bold">Alex Morgan</strong>
+              <span className="block text-sm text-luma-muted">
                 Product Manager
               </span>
             </div>

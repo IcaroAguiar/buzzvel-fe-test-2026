@@ -36,10 +36,14 @@ The course-photo concern was investigated rather than accepted as a crop change:
 - T0 corrective delta: PASS for conflict markers, secret scan, applicable Semgrep rules, strict typecheck and lint. No lockfile change; dependency vulnerability scanning was skipped. Binary assets are outside code scanning.
 - The landing browser file passed on desktop/mobile: navigation, focus, form validation/reset, no transmission, no-JavaScript privacy, selected Axe rules and overflow at seven widths. Its two project-specific cases intentionally skip the other viewport.
 - The new isolation regression first failed on mobile heading typography and footer focus color. A later run exposed outline-color animation during focus; button transitions now affect only background/border. The corrected isolation file passed in both projects. Only that failed file was rerun after the transition change; the complete suite was not rerun on that final styling delta.
-- Opened all five desktop and seven mobile comparison bands, plus 768/1024px tablet overview captures. Desktop measures 1280×5718 against 1280×5691 (+27px); mobile measures 402×7809 against 402×7799 (+10px). Baseline differences were +44/+48px. Height differences are measurements, not a visual-quality score.
+- Opened all five desktop and seven mobile comparison bands, plus 768/1024px tablet overview captures. Desktop measures 1280×5718 against 1280×5691 (+27px); mobile measures 402×7834 against 402×7799 (+35px). Baseline differences were +44/+48px. Height differences are measurements, not a visual-quality score.
 - All sections and frame-specific compositions remain present. Residuals include text rasterization/wrapping, small accumulated vertical offsets and CTA decoration geometry. Input typography and darkened muted labels are intentional accessibility differences.
 
-A fresh Astra review of the corrected source and these visual artifacts is pending. The baseline REQUEST_CHANGES is not approval of this correction.
+The fresh GPT-6 Astra review of `3494274` returned **APPROVE**, with no blocking finding. It read the original PDF and complete source, opened all twelve comparison bands, both tablet overviews, course/policy dialogs and selected source slices. Architecture, TypeScript, Tailwind ownership, all sections, local interactions and the honest candidate/AI disclosure were accepted. The original course-crop suspicion was not confirmed; centered cover is supported.
+
+Two low visual observations were accepted and corrected afterward: the mobile community asset now includes the entire bottom arc (362×340) with its reference interval above; testimonial author typography uses 16/14px and a 16px avatar gap. Production build, strict typecheck, changed-file lint, delta scanners and the affected landing browser file passed after those changes. The final community/author comparisons were opened again. Restoring the complete artwork increases mobile height compared with the intermediate 7809px capture; it is not trimmed to improve an aggregate height measurement.
+
+The independent review did not rerun the author's commands or perform remote operations. No extra CI, deploy or form submission was added.
 
 ## Limits
 
