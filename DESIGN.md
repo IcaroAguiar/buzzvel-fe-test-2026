@@ -42,3 +42,11 @@ as a single raster to preserve the exact supplied design. See docs/assets.md.
 No animations or interactions should be claimed as Figma-defined unless observed.
 Use simple hover/focus feedback and respect reduced motion. Never add decorative
 effects that move the implementation away from the supplied frames.
+
+## Featured-course typography correction
+
+The blue featured-course heading uses Plus Jakarta Sans 700: 48/56px with
+-0.96px tracking on desktop, 32/36px with -0.8px tracking on mobile. This
+section-specific role replaces the initial blanket 800-weight heading assumption.
+Comparison against the original frame glyph shapes and bounds supports the
+lighter weight and spacing; font inspector metadata was unavailable in the guest preview.

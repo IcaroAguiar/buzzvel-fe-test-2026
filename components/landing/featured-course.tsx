@@ -31,7 +31,7 @@ export function FeaturedCourse() {
           <Eyebrow className="text-white">Most popular this month</Eyebrow>
           <h2
             id="featured-title"
-            className="mb-5 font-display text-[32px]/[38px] font-extrabold tracking-[-.96px] md:text-5xl/14 md:tracking-[-1.2px]"
+            className="mb-5 font-display text-[32px]/9 font-bold tracking-[-.8px] md:text-5xl/14 md:tracking-[-.96px]"
           >
             Designing products people understand.
           </h2>
