@@ -4,7 +4,7 @@ My implementation of the Luma landing page from the supplied Figma design, built
 
 ## Getting started
 
-Use Node.js 24 and pnpm 12.18.0. The project doesn't need environment variables or a backend.
+Use Node.js 24 and pnpm 12.21.0. The project doesn't need environment variables or a backend.
 
 ```sh
 pnpm install --frozen-lockfile
