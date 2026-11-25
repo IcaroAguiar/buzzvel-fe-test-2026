@@ -2,7 +2,7 @@
   "name": "buzzvel-fe-test-2026",
   "version": "1.0.0",
   "private": true,
-  "packageManager": "pnpm@12.21.0",
+  "packageManager": "pnpm@12.23.0",
   "engines": {
     "node": ">=24.0.0"
   },
